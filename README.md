@@ -25,7 +25,7 @@ The idea and execution of this bot came from TeliDev, feel free to contribute.
 
 Special thanks to Rapptz the creator of discordpy (the API wrapper used to implement this bot.) and Its community.
 
-[![nextcord](https://img.shields.io/badge/GitHub-Nextcord-blue)](https://github.com/Rapptz/discord.py)
+[![discordpy](https://img.shields.io/badge/GitHub-Nextcord-blue)](https://github.com/Rapptz/discord.py)
 ## Requirements
 
 In addition to the packages/modules present in the [pyproject.toml](https://github.com/ImTeli/telibot/blob/main/pyproject.toml) file, the "ffmpeg" program must be in the application's root folder.

@@ -30,8 +30,11 @@ async def on_ready():
             os.makedirs(f"telibot/guilds/{g.id}/sounds")
     print("#" + "".center(70, "_") + "#")
 
+
 @app_commands.describe(file="Arquivo de audio que irá tocar quando você entrar.")
-@teli_client.tree.command(description="Insere um arquivo de áudio que toca toda vez que o usuário entra em alguma sala.")
+@teli_client.tree.command(
+    description="Insere um arquivo de áudio que toca toda vez que o usuário entra em alguma sala."
+)
 async def audio(interaction: Interaction, file: Attachment):
     await interaction.response.send_message(
         f"Processando arquivo: {file.filename}...", ephemeral=True
@@ -62,11 +65,16 @@ async def audio(interaction: Interaction, file: Attachment):
     except Exception as a:
         await interaction.followup.send(f"Error: {str(a)}", ephemeral=True)
 
+
 @teli_client.event
-async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+async def on_voice_state_update(
+    member: discord.Member, before: discord.VoiceState, after: discord.VoiceState
+):
     if before.channel is None and member.id != 1240446253268205638:
         nome, canal, guilda = member.global_name, member.voice.channel, member.guild
-        print(f"\033[0;32m{nome} entrou no canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m")
+        print(
+            f"\033[0;32m{nome} entrou no canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m"
+        )
 
         if os.path.isfile(f"telibot/guilds/{member.guild.id}/sounds/{member.id}.mp3"):
             file_path = f"telibot/guilds/{member.guild.id}/sounds/{member.id}.mp3"
@@ -84,8 +92,14 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
             except Exception as err:
                 print(f"Erro: {str(err)}")
 
-    elif (before.channel is not None and after.channel is None) and member.id != 1240446253268205638:
+    elif (
+        before.channel is not None and after.channel is None
+    ) and member.id != 1240446253268205638:
         nome, canal, guilda = member.global_name, before.channel, member.guild
-        print(f"\033[0;31m{nome} saiu do canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m")
+        print(
+            f"\033[0;31m{nome} saiu do canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m"
+        )
 
-teli_client.run(os.getenv("TOKEN"), log_handler=handler)
+
+if __name__ == "__main__":
+    teli_client.run(os.getenv("TOKEN"), log_handler=handler)

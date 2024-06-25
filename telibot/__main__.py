@@ -70,7 +70,7 @@ async def audio(interaction: Interaction, file: Attachment):
 async def on_voice_state_update(
     member: discord.Member, before: discord.VoiceState, after: discord.VoiceState
 ):
-    if before.channel is None and member.id != 1240446253268205638:
+    if before.channel is None and member.global_name is not None:
         nome, canal, guilda = member.global_name, member.voice.channel, member.guild
         print(
             f"\033[0;32m{nome} entrou no canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m"
@@ -94,7 +94,7 @@ async def on_voice_state_update(
 
     elif (
         before.channel is not None and after.channel is None
-    ) and member.id != 1240446253268205638:
+    ) and member.global_name is not None:
         nome, canal, guilda = member.global_name, before.channel, member.guild
         print(
             f"\033[0;31m{nome} saiu do canal de voz {canal} no servidor {guilda} em {dt.now()}.\033[0m"

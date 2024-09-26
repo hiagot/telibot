@@ -168,3 +168,5 @@ ffmpeg.exe
 #start_bat
 bot_start.bat
 start.ps1
+Makefile
+poetry.lock

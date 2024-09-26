@@ -5,7 +5,14 @@ import discord.types
 
 from datetime import datetime as dt
 from dotenv import load_dotenv
-from discord import Interaction, Attachment, app_commands
+from discord import (
+    Activity,
+    ActivityType,
+    Interaction,
+    Attachment,
+    app_commands,
+    Status,
+)
 from telibot.core.custom_exceptions import FileSizeException, NotAudioException
 from telibot.utils.log_handler import handler
 from telibot.core.teli_client import TeliClient
@@ -29,6 +36,11 @@ async def on_ready():
             os.makedirs(f"telibot/guilds/{g.id}")
             os.makedirs(f"telibot/guilds/{g.id}/sounds")
     print("#" + "".center(70, "_") + "#")
+    await asyncio.sleep(10)
+    await teli_client.change_presence(
+        status=Status.online,
+        activity=Activity(name="Teli programming me...", type=ActivityType(3)),
+    )
 
 
 @app_commands.describe(file="Arquivo de audio que irá tocar quando você entrar.")

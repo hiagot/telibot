@@ -1,17 +1,17 @@
-[tool.poetry]
+[project]
 name = "telibot"
 version = "0.1.0"
 description = "Telibot, a discord bot!"
 authors = ["TeliDev <hiagobvt@live.com>"]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "discord-py[voice]>=2.5.2",
+    "pydantic-settings>=2.8.1",
+    "setuptools>=77.0.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12.0"
-discord-py = {extras = ["voice"], version = "^2.3.2"}
-setuptools = "^70.0.0"
-python-dotenv = "^1.0.1"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pylint]
+disable = [
+"line-too-long"
+]

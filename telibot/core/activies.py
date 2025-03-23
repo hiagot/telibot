@@ -1,6 +1,7 @@
 from typing import Any
 from discord import BaseActivity, ActivityType
 
+
 class DefaultActivity(BaseActivity):
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)

@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/*.pyo": true,
+        "**/*.venv": true,
+        "**/*.ruff_cache": true,
+        "**/*.vscode": true,
+        "**/.mypy_cache": true
+    }
+}

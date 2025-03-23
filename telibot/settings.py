@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     """Settings for the Discord bot."""
 
     DISCORD_BOT_TOKEN: str
+    API_URL: str
 
     model_config = SettingsConfigDict(
         env_file=".env", extra="ignore", env_file_encoding="utf-8"

@@ -31,6 +31,8 @@ Special thanks to Rapptz the creator of discordpy (the API wrapper used to imple
 
 In addition to the packages/modules present in the [pyproject.toml](https://github.com/ImTeli/telibot/blob/main/pyproject.toml) file, the "ffmpeg" program must be in the application's root folder.
 
+If using Ubuntu/Debian based linux distro you can: sudo apt install ffmpeg
+
 The builds of this program can be found at: [ffmpeg](https://www.gyan.dev/ffmpeg/builds/)
 
 Thank's to [Gyan.dev](https://github.com/GyanD) for the release builds.

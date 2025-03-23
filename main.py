@@ -84,7 +84,7 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
                 else:
                     print(f"Cannot connect: {member.name} is not in a voice channel")
                     return
-                vc.play(discord.FFmpegPCMAudio(file_path)) #type: ignore
+                vc.play(discord.FFmpegPCMAudio(file_path))
                 while True:
                     await asyncio.sleep(0.01)
                     try:
@@ -106,4 +106,4 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
 
 
 if __name__ == "__main__":
-    teli_client.run(SETTINGS.TOKEN)
+    teli_client.run(SETTINGS.DISCORD_BOT_TOKEN)

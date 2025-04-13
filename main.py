@@ -5,7 +5,6 @@ import pathlib
 from datetime import datetime as dt
 
 import discord
-import discord.types
 from discord import (
     Activity,
     ActivityType,
@@ -17,16 +16,14 @@ from discord import (
 from discord.errors import Forbidden, InvalidData
 
 from telibot.core.client import TeliClient
-from telibot.core.utils import BotLogHandler, post_guild, post_message, post_user
+from telibot.core.requests import post_guild, post_message, post_user
 from telibot.exceptions import FileSizeException, NotAudioException
 from telibot.settings import get_settings
 from telibot.utils import play_audio_file
 
-settings = get_settings()
 
 intents = discord.Intents.all()
 teli_client = TeliClient(intents=intents)
-logging = BotLogHandler()
 
 
 @teli_client.event
@@ -39,14 +36,12 @@ async def on_ready():
         if not os.path.exists(f"telibot/guilds/{g.id}"):
             os.makedirs(f"telibot/guilds/{g.id}")
             os.makedirs(f"telibot/guilds/{g.id}/sounds")
-        logging.log_message(post_user(user=g.owner))
-        logging.log_message(post_guild(guild=g))
+        post_user(user=g.owner)
+        post_guild(guild=g)
         for user in g.members:
-            logging.log_message(post_user(user=user))
+            post_user(user=user)
     print("#" + "".center(70, "_") + "#")
 
-    logging.log_message(f"Bot started successfully! {teli_client.user.name} id: {teli_client.user.id}", level=20)
-    logging.log_message(f"Bot present in the following servers: {', '.join([str(g) for g in teli_client.guilds])}", level=20)
     await asyncio.sleep(10)
     await teli_client.change_presence(status=Status.online, activity=Activity(name="Teli programming me...", type=ActivityType(3)))
 
@@ -92,7 +87,7 @@ async def on_message(message: discord.Message):
     if message.author == teli_client.user:
         return
 
-    logging.log_message(post_message(message=message))
+    post_message(message=message)
 
 
 @teli_client.event
@@ -105,7 +100,6 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
         channel = member.voice.channel if member.voice else None
 
         print(f"\033[0;32m{name} entrou no canal de voz {channel} no servidor {guild} em {dt.now().strftime('%d/%m/%Y às %H:%M:%S')}.\033[0m")
-        logging.log_message(f"{name} entrou no canal de voz {channel} no servidor {guild} em {dt.now().strftime('%d/%m/%Y às %H:%M:%S')}.", level=25)
 
         file_path = f"telibot/guilds/{member.guild.id}/sounds/{member.id}.mp3"
         if os.path.isfile(file_path):
@@ -117,8 +111,6 @@ async def on_voice_state_update(member: discord.Member, before: discord.VoiceSta
         channel = before.channel
 
         print(f"{name} saiu do canal de voz {channel} no servidor {guild} em {dt.now().strftime('%d/%m/%Y às %H:%M:%S')}.")
-        logging.log_message(f"{name} saiu do canal de voz {channel} no servidor {guild} em {dt.now().strftime('%d/%m/%Y às %H:%M:%S')}.", level=25)
-
 
 if __name__ == "__main__":
-    teli_client.run(settings.DISCORD_BOT_TOKEN, log_handler=logging, log_level=30)
+    teli_client.run(get_settings().DISCORD_BOT_TOKEN)

@@ -1,7 +1,9 @@
 """Settings for the Discord bot."""
 
 from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 @lru_cache
 class Settings(BaseSettings):

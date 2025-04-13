@@ -20,3 +20,6 @@ disable = [
 "W0223",
 "W0718",
 ]
+
+[tool.mypy]
+files = ["telibot/**/*.py"]

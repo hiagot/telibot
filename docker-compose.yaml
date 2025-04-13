@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: app
     build: .
     restart: unless-stopped
     volumes:
@@ -8,6 +9,8 @@ services:
     environment:
       - UV_COMPILE_BYTECODE=1
       - UV_LINK_MODE=copy
+    env_file:
+      - .env
     working_dir: /app
     command: ["uv", "run", "main.py"]
     networks:
@@ -18,4 +21,4 @@ volumes:
 
 networks:
   telibot_network:
-    driver: bridge
+    external: true

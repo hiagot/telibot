@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    restart: unless-stopped
     volumes:
       - .:/app
       - app-data:/app/data

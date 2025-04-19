@@ -2,6 +2,8 @@ FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y ffmpeg && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
 

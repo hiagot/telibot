@@ -82,18 +82,17 @@ async def audio(interaction: Interaction, file: Attachment):
         await interaction.followup.send(f"Erro inesperado: {str(a)}", ephemeral=True)
 
 
-@app_commands.describe(file="Remove o arquivo de áudio associado ao usuário.")
 @teli_client.tree.command(description="Remove o arquivo de áudio que toca ao entrar na sala.")
 async def remover_audio(interaction: Interaction):
     """ Command to remove the audio file associated with the user. """
-    await interaction.response.send_message(f"Removendo arquivo...", ephemeral=True)
+    await interaction.response.send_message("Removendo arquivo...", ephemeral=True)
     try:
         filepath = pathlib.Path(os.path.join("telibot", "guilds", str(interaction.guild_id), "sounds", f"{interaction.user.id}.mp3"))
         if os.path.exists(filepath):
             os.remove(filepath)
             await interaction.followup.send(f"{interaction.user.mention} seu arquivo foi removido com sucesso!", ephemeral=True)
         else:
-            await interaction.followup.send(f"Arquivo não encontrado!", ephemeral=True)
+            await interaction.followup.send("Arquivo não encontrado!", ephemeral=True)
 
     except Exception as a:
         await interaction.followup.send(f"Erro inesperado: {str(a)}", ephemeral=True)
